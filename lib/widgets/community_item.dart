@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:momsclub/styles/text_styles.dart';
 
 class CommunityItem extends StatelessWidget {
@@ -13,8 +14,8 @@ class CommunityItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    TextStyle _name_text_style = H4.copyWith(color: Colors.white);
-    TextStyle _loc_text_style = ThinText.copyWith(color: Colors.white);
+    TextStyle _name_text_style = GoogleFonts.roboto(textStyle: H4.copyWith(color: Colors.white)) ;
+    TextStyle _loc_text_style = GoogleFonts.montserrat(textStyle: ThinText.copyWith(color: Colors.white));
 
     BorderRadius _br = BorderRadius.circular(10);
 

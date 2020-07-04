@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:momsclub/styles/text_styles.dart';
+import 'package:momsclub/utils/infos.dart';
 
 class InfoCommunityTab extends StatelessWidget {
 
@@ -14,8 +16,8 @@ class InfoCommunityTab extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("Information", style: H2.copyWith(color: Colors.black),),
-          Text(text)
+          Text("About", style: H2.copyWith(color: AppColor.PRIMARY),),
+          Text(text, style: GoogleFonts.openSans(textStyle: TextStyle(fontSize: 16)),),
         ],
       ),
     );

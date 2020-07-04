@@ -22,11 +22,11 @@ class _AppBottomNavState extends State<AppBottomNav> {
       _selectedIndex = index;
     });
     widget.onItemTapped(index);
-    switch(index){
-      case 1:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => SearchScreen()));
-        break;
-    }
+//    switch(index){
+//      case 1:
+//        Navigator.of(context).push(MaterialPageRoute(builder: (context) => SearchScreen()));
+//        break;
+//    }
   }
   @override
   Widget build(BuildContext context) {
@@ -38,13 +38,13 @@ class _AppBottomNavState extends State<AppBottomNav> {
           icon: Icon(Icons.home),
           title: Text('Home'),
         ),
+//        BottomNavigationBarItem(
+//          icon: Icon(Icons.search),
+//          title: Text('Explore'),
+//        ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          title: Text('Explore'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.calendar_today),
-          title: Text('History'),
+          icon: Icon(Icons.favorite),
+          title: Text('Favorite'),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.account_circle),

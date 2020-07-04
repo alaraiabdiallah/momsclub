@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:momsclub/utils/infos.dart';
 
 import 'screens/home_screen.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: AppColor.PRIMARY
+  ));
   runApp(MyApp());
 }
 

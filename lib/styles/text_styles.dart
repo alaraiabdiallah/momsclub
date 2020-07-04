@@ -1,14 +1,17 @@
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:momsclub/utils/infos.dart';
 
-var Heading = TextStyle(
-    fontWeight: FontWeight.bold,
-    color: AppColor.PRIMARY
+var Heading = GoogleFonts.poppins(
+  textStyle: TextStyle(
+      fontWeight: FontWeight.bold,
+      color: AppColor.PRIMARY
+  )
 );
 
 var ThinText = TextStyle(
-    fontWeight: FontWeight.w100,
+    fontWeight: FontWeight.w300,
     color: AppColor.PRIMARY
 );
 

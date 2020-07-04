@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:momsclub/models/community_model.dart';
 import 'package:momsclub/styles/text_styles.dart';
+import 'package:momsclub/utils/infos.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactCommunityTab extends StatelessWidget {
@@ -10,12 +12,13 @@ class ContactCommunityTab extends StatelessWidget {
 
 
   Widget _buildListContact(Contact data){
+    TextStyle _bodyTextStyle = GoogleFonts.openSans(textStyle: TextStyle(fontSize: 18));
     switch(data.source){
       case 'phone':
         return ListTile(
           leading: Icon(Icons.phone),
-          title: Text("Phone"),
-          subtitle: Text(data.value, style: TextStyle(color: Colors.blue),),
+          title: Text("Phone", style: _bodyTextStyle,),
+          subtitle: Text(data.value, style: _bodyTextStyle.copyWith(color: Colors.blue)),
           onTap: () async {
             var url = "tel:${data.value}";
             if (await canLaunch(url)) await launch(url);
@@ -25,8 +28,8 @@ class ContactCommunityTab extends StatelessWidget {
       case 'instagram':
         return ListTile(
           leading: Icon(Icons.link),
-          title: Text("Instagram"),
-          subtitle: Text("@${data.value}", style: TextStyle(color: Colors.blue),),
+          title: Text("Instagram", style: _bodyTextStyle),
+          subtitle: Text("@${data.value}", style: _bodyTextStyle.copyWith(color: Colors.blue),),
           onTap: () async {
             var url = "https://instagram.com/${data.value}";
             if (await canLaunch(url)) await launch(url);
@@ -36,8 +39,8 @@ class ContactCommunityTab extends StatelessWidget {
       case 'whatsapp':
         return ListTile(
           leading: Icon(Icons.chat),
-          title: Text("WhatsApp"),
-          subtitle: Text("${data.value}", style: TextStyle(color: Colors.blue),),
+          title: Text("WhatsApp", style: _bodyTextStyle),
+          subtitle: Text("${data.value}", style: _bodyTextStyle.copyWith(color: Colors.blue),),
           onTap: () async {
             var url = "https://wa.me/${data.value}";
             if (await canLaunch(url)) await launch(url);
@@ -57,7 +60,7 @@ class ContactCommunityTab extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("Contact", style: H2.copyWith(color: Colors.black),),
+          Text("Contact", style: H2.copyWith(color: AppColor.PRIMARY),),
           ...data.map(_buildListContact).toList()
         ],
       ),
