@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "801078352402",
+    "firebase_url": "https://momsclub-8d5c2.firebaseio.com",
+    "project_id": "momsclub-8d5c2",
+    "storage_bucket": "momsclub-8d5c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801078352402:android:1efe4d7a0566c09cdc56cb",
+        "android_client_info": {
+          "package_name": "me.alarai.momsclub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "801078352402-r4nmtevjog0kbtkl7s50hgtniherfhsq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqpHlcJCtocX_hI7HHBk6iDlvBnMNuWic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "801078352402-r4nmtevjog0kbtkl7s50hgtniherfhsq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
