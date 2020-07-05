@@ -3,6 +3,8 @@ import 'package:momsclub/styles/text_styles.dart';
 import 'package:momsclub/utils/str_res.dart';
 import 'package:momsclub/utils/infos.dart';
 
+import 'not_found.dart';
+
 class FavoriteFragment extends StatefulWidget {
   @override
   _FavoriteFragmentState createState() => _FavoriteFragmentState();
@@ -19,6 +21,7 @@ class _FavoriteFragmentState extends State<FavoriteFragment> {
           margin: EdgeInsets.only(top: screenTextMarginTop(context), bottom: screenTextMarginBotttom),
           child: Text(StrRes.FAV_COM, style: H1,),
         ),
+        NotFoundDisplay()
       ],
     );
   }

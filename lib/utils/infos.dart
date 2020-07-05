@@ -10,6 +10,7 @@ class AppColor {
   static const SECONDARY = Color(0xffF8E6F6);
   static const GREY = Color(0xffF5F5F5);
   static const GREY2 = Color(0xffF0F0F0);
+  static const GREY3 = Color(0xff606060);
 }
 
 EdgeInsets screenBodyPadding =  EdgeInsets.symmetric(vertical: 0, horizontal: 25);

@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:momsclub/screens/login_screen.dart';
 import 'package:momsclub/styles/text_styles.dart';
 import 'package:momsclub/utils/infos.dart';
 import 'package:momsclub/utils/str_res.dart';
+import 'package:momsclub/widgets/buttons.dart';
 
 class MyCommunityFragment extends StatefulWidget {
   @override
@@ -10,6 +12,11 @@ class MyCommunityFragment extends StatefulWidget {
 }
 
 class _MyCommunityFragmentState extends State<MyCommunityFragment> {
+
+  void onLoginButtonPressed(){
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -31,13 +38,7 @@ class _MyCommunityFragmentState extends State<MyCommunityFragment> {
                 SizedBox(height: 15,),
                 Container(
                   width: double.infinity,
-                  child: RaisedButton(
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-                    child: Text(StrRes.LOGIN, style: H5.copyWith(color: Colors.white),),
-                    color: AppColor.PRIMARY,
-                    onPressed: (){},
-                  ),
+                  child: AppButton(onPressed: onLoginButtonPressed,text: StrRes.LOGIN),
                 )
               ],
             ),
