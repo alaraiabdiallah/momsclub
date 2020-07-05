@@ -7,8 +7,12 @@ class StrRes {
   static final RECENT = "Recent";
   static final COMM_NOTFOUND = "We can't find community";
   static final LOGIN = "LOGIN";
+  static final LOADING = "LOADING";
   static final SIGNIN = "Sign In";
   static final REGISTER = "Register";
   static final DOES_NOT_HAVE_ACCOUNT = "Don't have an account?";
   static final ALREADY_HAVE_ACCOUNT = "Already have an account?";
+  static final REGISTER_SUCCEED = "Success to register, please verify your email.";
+  static final REGISTER_FAILED = "Failed to register, please contact admin.";
+  static final EMAIL_ALREADY_REGISTERED = "Email already registered.";
 }

@@ -17,6 +17,7 @@ class AppButton extends StatelessWidget {
       child: Text(text, style: H5.copyWith(color: Colors.white),),
       color: AppColor.PRIMARY,
       onPressed: onPressed,
+
     );
   }
 }
