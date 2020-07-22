@@ -12,6 +12,9 @@ import 'package:momsclub/widgets/not_found.dart';
 import 'community_item.dart';
 
 class HomeFragment extends StatefulWidget {
+
+  final Function onChange;
+  const HomeFragment({Key key, this.onChange}) : super(key: key);
   @override
   _HomeFragmentState createState() => _HomeFragmentState();
 }
@@ -22,7 +25,11 @@ class _HomeFragmentState extends State<HomeFragment> {
   final _search_text_ctrl = TextEditingController();
   String _search_keyword = "";
 
-  Community _convertDocument(DocumentSnapshot document) => Community.fromJson(document.data);
+  Community _convertDocument(DocumentSnapshot document) {
+    var data = document.data;
+    data['id'] = document.documentID;
+    return Community.fromJson(data);
+  }
 
   bool _searchQuery(doc){
     String name = doc.name.toLowerCase();
@@ -64,7 +71,7 @@ class _HomeFragmentState extends State<HomeFragment> {
         location: data.location,
         imageURL: data.imageURL,
         onTap: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => CommunityScreen2(data: data)));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => CommunityScreen2(data: data, onChange: widget.onChange,)));
         }
     );
   }

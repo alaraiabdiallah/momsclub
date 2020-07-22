@@ -15,5 +15,5 @@ class AppColor {
 
 EdgeInsets screenBodyPadding =  EdgeInsets.symmetric(vertical: 0, horizontal: 25);
 double screenTextMarginBotttom = 15;
-double screenTextMarginTop(context) => (MediaQuery.of(context).size.height * (1/7));
+double screenTextMarginTop(context) => (MediaQuery.of(context).size.height * (1/7) - 60);
 double commonGridSize(context) => (MediaQuery.of(context).size.height * (6/7));

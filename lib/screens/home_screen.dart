@@ -26,23 +26,34 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() => _navIndex = index );
   }
 
+  onChange() {
+    setState(() {_navIndex = 1;});
+  }
+
   @override
   void initState() {
     super.initState();
   }
+  
+  _navStack(int index){
+    var widgets = <Widget>[
+      HomeFragment(onChange: onChange,),
+      FavoriteFragment(),
+      MyCommunityFragment(),
+    ];
+    return widgets[index];
+  }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      body: IndexedStack(
-        index: _navIndex,
-        children: <Widget>[
-          HomeFragment(),
-          FavoriteFragment(),
-          MyCommunityFragment(),
-        ],
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Text(StrRes.APP_NAME, style: H4),
+        centerTitle: true,
       ),
+      body: _navStack(_navIndex),
       bottomNavigationBar: AppBottomNav(onItemTapped: _onBottomNavTapped)
     );
   }

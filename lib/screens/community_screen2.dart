@@ -1,29 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:momsclub/models/community_model.dart';
+import 'package:momsclub/models/favorite_model.dart';
 import 'package:momsclub/styles/text_styles.dart';
 import 'package:momsclub/utils/infos.dart';
-import 'package:momsclub/utils/str_res.dart';
+import 'package:momsclub/utils/local_db.dart';
 import 'package:momsclub/widgets/contact_comm_tab.dart';
 import 'package:momsclub/widgets/info_comm_tab.dart';
 
 class CommunityScreen2 extends StatefulWidget {
   final Community data;
 
-  const CommunityScreen2({Key key, this.data}) : super(key: key);
+  final Function onChange;
+
+  const CommunityScreen2({Key key, this.data, this.onChange}) : super(key: key);
   @override
   _CommunityScreen2State createState() => _CommunityScreen2State();
 }
 
 class _CommunityScreen2State extends State<CommunityScreen2> {
 
+  bool _isFavorite = false;
+
+  void checkFavorite() async{
+    var isFav = await isFavorite(widget.data.id);
+    setState(() => _isFavorite = isFav);
+  }
+
+  @override
+  void initState() {
+    checkFavorite();
+  }
+
   _backButton() => GestureDetector(
     onTap: () => Navigator.of(context).pop(),
-    child: Row(
-      children: <Widget>[
-        Icon(Icons.arrow_back,size: H1.fontSize, color: Colors.white),
-        SizedBox(width: 10,),
-        Text(widget.data.name, style: H4.copyWith(color: Colors.white),)
-      ],
+    child: Container(
+      child: Row(
+        children: <Widget>[
+          Icon(Icons.arrow_back,size: H1.fontSize, color: Colors.white),
+          SizedBox(width: 10,),
+          Expanded(
+            child: Text(widget.data.name, style: H4.copyWith(color: Colors.white)),
+          )
+
+        ],
+      ),
     ),
   );
 
@@ -70,6 +90,18 @@ class _CommunityScreen2State extends State<CommunityScreen2> {
     );
   }
 
+  _onFavoriteButtonPressed(){
+    var fav = FavoriteModel(id: widget.data.id);
+    if(_isFavorite){
+      setState(() => _isFavorite = false);
+      deleteFavorite(fav.id);
+    } else{
+      setState(() => _isFavorite = true);
+      insertFavorite(fav);
+    }
+    widget.onChange();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,9 +119,9 @@ class _CommunityScreen2State extends State<CommunityScreen2> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        onPressed: _onFavoriteButtonPressed,
         backgroundColor: AppColor.PRIMARY,
-        child: Icon(Icons.favorite_border),
+        child: _isFavorite ? Icon(Icons.favorite) : Icon(Icons.favorite_border),
       )
     );
   }

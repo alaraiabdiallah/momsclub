@@ -1,14 +1,15 @@
 class Community {
+  String id;
   String name;
   String location;
   String imageURL;
   String desc;
   List<Contact> contacts;
 
-  Community(
-      {this.name, this.location, this.imageURL, this.desc, this.contacts});
+  Community({this.id, this.name, this.location, this.imageURL, this.desc, this.contacts});
 
   Community.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     name = json['name'];
     location = json['location'];
     imageURL = json['imageURL'];
@@ -26,6 +27,7 @@ class Community {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
     data['name'] = this.name;
     data['location'] = this.location;
     data['imageURL'] = this.imageURL;

@@ -1,4 +1,5 @@
 class StrRes {
+  static final APP_NAME = "MomsClub";
   static final MEET_COM = "Meet Community";
   static final FAV_COM = "Favorite Communities";
   static final MY_COM = "My Communities";
