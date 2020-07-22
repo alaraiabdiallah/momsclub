@@ -1,3 +1,5 @@
+import 'package:momsclub/models/community_model.dart';
+
 class StrRes {
   static final APP_NAME = "MomsClub";
   static final MEET_COM = "Meet Community";
@@ -13,6 +15,9 @@ class StrRes {
   static final LOADING = "LOADING";
   static final SIGNIN = "Sign In";
   static final REGISTER = "Register";
+  static final EMAIL = "Email";
+  static final ABOUT = "About";
+  static final PASSWORD = "Password";
   static final DOES_NOT_HAVE_ACCOUNT = "Don't have an account?";
   static final ALREADY_HAVE_ACCOUNT = "Already have an account?";
   static final REGISTER_SUCCEED =
@@ -25,4 +30,12 @@ class StrRes {
   static final REGISTER_MY_COMMUNITY = "REGISTER MY COMMUNITY";
   static final NOT_HAVE_COMM =
       "You not have community, please register the community.";
+  static final COMMUNITY_FORM = "Community Form";
+  static final NEXT = "Next";
+  static final CANCEL = "Cancel";
+  static final COMMUNITY_NAME = "Community Name";
+  static final COMMUNITY_DESC = "Community Description";
+  static final COMMUNITY_FIELD_INSTR_NAME =
+      "Ex. Komunitas ibu dan anak bandung";
+  static final COMMUNITY_FIELD_INSTR_DESC = "Tell us about your community";
 }

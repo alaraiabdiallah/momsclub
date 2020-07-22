@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:momsclub/screens/login_screen.dart';
+import 'package:momsclub/screens/register_comm_screen.dart';
 import 'package:momsclub/styles/text_styles.dart';
 import 'package:momsclub/utils/infos.dart';
 import 'package:momsclub/utils/str_res.dart';
@@ -26,9 +27,14 @@ class _MyCommunityFragmentState extends State<MyCommunityFragment> {
             )));
   }
 
-  _onLogoutButtonPressed() async {
+  void _onLogoutButtonPressed() async {
     await _auth.signOut();
     setState(() => _isLogin = false);
+  }
+
+  void _onRegisterCommButtonPressed() {
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => RegisterCommunityScreen()));
   }
 
   void _checkAuth() async {
@@ -101,8 +107,9 @@ class _MyCommunityFragmentState extends State<MyCommunityFragment> {
         ),
         Container(
           width: double.infinity,
-          child:
-              AppButton(onPressed: () {}, text: StrRes.REGISTER_MY_COMMUNITY),
+          child: AppButton(
+              onPressed: _onRegisterCommButtonPressed,
+              text: StrRes.REGISTER_MY_COMMUNITY),
         ),
         Expanded(
           child: Container(),

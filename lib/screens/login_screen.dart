@@ -82,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
               width: _formWidgetWidth,
               child: AppFormInput(
                 controller: _emailTextCtrl,
-                placeholder: "Email",
+                placeholder: StrRes.EMAIL,
               ),
             ),
             SizedBox(
@@ -93,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: AppFormInput(
                 obscure: true,
                 controller: _passwordTextCtrl,
-                placeholder: "Password",
+                placeholder: StrRes.PASSWORD,
               ),
             ),
             SizedBox(
