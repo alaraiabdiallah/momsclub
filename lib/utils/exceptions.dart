@@ -1,4 +1,6 @@
-class EmailAlreadyRegisteredException implements Exception{
-  String message;
-  EmailAlreadyRegisteredException(this.message);
+import 'package:momsclub/utils/str_res.dart';
+
+class UserVerifyException implements Exception {
+  String message = StrRes.USER_UNVERIFIED;
+  UserVerifyException({this.message});
 }
