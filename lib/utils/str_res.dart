@@ -9,6 +9,10 @@ class StrRes {
       "You need to login for register your own community.";
   static final BACK = "Back";
   static final RECENT = "Recent";
+  static final CONTACT = "Contact";
+  static final PHONE = "Phone";
+  static final WA = "WhatsApp";
+  static final IG = "Instagram";
   static final COMM_NOTFOUND = "We can't find community";
   static final LOGIN = "LOGIN";
   static final LOGOUT = "LOGOUT";
@@ -32,10 +36,20 @@ class StrRes {
       "You not have community, please register the community.";
   static final COMMUNITY_FORM = "Community Form";
   static final NEXT = "Next";
+  static final PROVINCE = "Province";
+  static final CITY = "City";
   static final CANCEL = "Cancel";
-  static final COMMUNITY_NAME = "Community Name";
-  static final COMMUNITY_DESC = "Community Description";
-  static final COMMUNITY_FIELD_INSTR_NAME =
-      "Ex. Komunitas ibu dan anak bandung";
+  static final COMMUNITY_NAME = "Name";
+  static final COMMUNITY_LOCATION = "Location";
+  static final COMMUNITY_DESC = "Description";
+  static final COMMUNITY_FIELD_INSTR_NAME = "Ex. Komunitas ibu dan anak bandung";
   static final COMMUNITY_FIELD_INSTR_DESC = "Tell us about your community";
+  static final COMMUNITY_FIELD_INSTR_LOC = "Ex: Jakarta";
+  static final COMMUNITY_FIELD_INSTR_PHONE = "Ex: +628XXXXXX";
+  static final COMMUNITY_FIELD_INSTR_IG = "Username of your community Instagram";
+  static final COMMUNITY_FIELD_INSTR_SELECT = "Tap to select";
+  static final FAILED_LOAD_PROVINCES = "Failed to retrive provinces.";
+  static final FAILED_LOAD_CITIES = "Failed to retrive cities.";
+  static final SELECT_PROVINCE = "Select Province";
+  static final SEARCH_PROVINCE = "Search Province";
 }
