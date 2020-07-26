@@ -4,9 +4,10 @@ class Community {
   String location;
   String imageURL;
   String desc;
+  bool active;
   List<Contact> contacts;
 
-  Community({this.id, this.name, this.location, this.imageURL, this.desc, this.contacts});
+  Community({this.id, this.name, this.location, this.imageURL, this.desc, this.contacts, this.active});
 
   Community.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -14,6 +15,7 @@ class Community {
     location = json['location'];
     imageURL = json['imageURL'];
     desc = json['desc'];
+    active = json['active'];
     if (json['contacts'] != null) {
       contacts = new List<Contact>();
       json['contacts'].forEach((v) {
@@ -32,6 +34,7 @@ class Community {
     data['location'] = this.location;
     data['imageURL'] = this.imageURL;
     data['desc'] = this.desc;
+    data['active'] = this.active;
     if (this.contacts != null) {
       data['contacts'] = this.contacts.map((v) => v.toJson()).toList();
     }

@@ -82,6 +82,7 @@ class _CommunityScreen2State extends State<CommunityScreen2> {
         borderRadius: BorderRadius.only(topLeft: Radius.circular(_radius), topRight: Radius.circular(_radius))
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           InfoCommunityTab(text: widget.data.desc,),
           ContactCommunityTab(data: widget.data.contacts,),

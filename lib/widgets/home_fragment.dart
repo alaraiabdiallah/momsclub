@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:momsclub/data_sources/firebase/community.dart';
 import 'package:momsclub/models/community_model.dart';
 import 'package:momsclub/screens/community_screen2.dart';
 import 'package:momsclub/styles/text_styles.dart';
@@ -20,8 +21,6 @@ class HomeFragment extends StatefulWidget {
 }
 
 class _HomeFragmentState extends State<HomeFragment> {
-
-  Stream<QuerySnapshot> loadCommunities() => Firestore.instance.collection('communities').snapshots();
   final _search_text_ctrl = TextEditingController();
   String _search_keyword = "";
 
@@ -78,7 +77,7 @@ class _HomeFragmentState extends State<HomeFragment> {
 
   Widget _buildCommunityGrid(context){
     return StreamBuilder(
-        stream: loadCommunities(),
+        stream: CommunityFB.loadCommunities(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
           if (snapshot.hasError)
             return Container(

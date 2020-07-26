@@ -61,4 +61,6 @@ class StrRes {
   static final FAILED_UPLOAD_IMAGE = "Failed upload image.";
   static final FAILED_REGISTER_COMMUNITY = "Failed to register community.";
   static final SUCCESS_REGISTER_COMMUNITY = "Success to register community.";
+  static final VIEW = "View";
+  static final EDIT = "Edit";
 }

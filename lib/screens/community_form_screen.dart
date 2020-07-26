@@ -19,9 +19,9 @@ import 'package:slugify/slugify.dart';
 
 class CommunityFormScreen extends StatefulWidget {
 
-  final Community community;
+  final Community data;
 
-  const CommunityFormScreen({Key key, this.community}) : super(key: key);
+  const CommunityFormScreen({Key key, this.data}) : super(key: key);
   @override
   _CommunityFormScreenState createState() =>
       _CommunityFormScreenState();
@@ -31,6 +31,7 @@ class _CommunityFormScreenState extends State<CommunityFormScreen> {
 
   int _step = 0;
   File _image;
+  String _imagePath;
   FirebaseUser _user;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -76,6 +77,7 @@ class _CommunityFormScreenState extends State<CommunityFormScreen> {
   @override
   void initState() {
     _checkAuth();
+    _editDataAttach();
     super.initState();
   }
 
@@ -83,6 +85,19 @@ class _CommunityFormScreenState extends State<CommunityFormScreen> {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     if (user == null) Navigator.of(context).pop();
     setState(()=> _user = user);
+  }
+
+  void _editDataAttach(){
+    if(widget.data != null){
+      // List<Contact> contacts = widget.data.contacts;
+      _nameTxtCtrl.text = widget.data.name;
+      _locTxtCtrl.text = widget.data.location;
+      _descTxtCtrl.text = widget.data.desc;
+      _imagePath = widget.data.imageURL;
+      // _phoneTxtCtrl.text = contacts.where((e) => e.source == "phone").first.value;
+      // _waTxtCtrl.text = contacts.where((e) => e.source == "whatsapp").first.value;
+      // _igTxtCtrl.text = contacts.where((e) => e.source == "instagram").first.value;
+    }
   }
 
   _onButton1Pressed() {
@@ -211,7 +226,7 @@ class _CommunityFormScreenState extends State<CommunityFormScreen> {
   }
 
   _button2Condition() {
-    return _nameTxtCtrl.text.isNotEmpty && _locTxtCtrl.text.isNotEmpty && _descTxtCtrl.text.isNotEmpty && (_image != null);
+    return _nameTxtCtrl.text.isNotEmpty && _locTxtCtrl.text.isNotEmpty && _descTxtCtrl.text.isNotEmpty && (_imagePath != null);
   }
 
   Widget buildActionButtons() {
@@ -285,6 +300,14 @@ class _CommunityFormScreenState extends State<CommunityFormScreen> {
                 children: <Widget>[
                   Image.file(_image, width: 200,height: 150,),
                   IconButton(icon: Icon(Icons.cancel), onPressed: _onImageCancel,)
+                ],
+              )
+            ],
+            if(_image == null && widget.data.imageURL != null)...[
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Image.network(widget.data.imageURL, width: 200,height: 150,),
                 ],
               )
             ],

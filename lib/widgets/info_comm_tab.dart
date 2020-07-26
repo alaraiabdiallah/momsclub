@@ -23,6 +23,7 @@ class InfoCommunityTab extends StatelessWidget {
           Text(
             text,
             style: GoogleFonts.openSans(textStyle: TextStyle(fontSize: 16)),
+            textAlign: TextAlign.left,
           ),
         ],
       ),

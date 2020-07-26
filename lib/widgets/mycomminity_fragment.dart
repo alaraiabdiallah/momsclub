@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:momsclub/data_sources/firebase/community.dart';
+import 'package:momsclub/models/community_model.dart';
+import 'package:momsclub/screens/community_screen2.dart';
 import 'package:momsclub/screens/login_screen.dart';
 import 'package:momsclub/screens/community_form_screen.dart';
 import 'package:momsclub/styles/text_styles.dart';
@@ -15,6 +18,9 @@ class MyCommunityFragment extends StatefulWidget {
 class _MyCommunityFragmentState extends State<MyCommunityFragment> {
   FirebaseAuth _auth = FirebaseAuth.instance;
   bool _isLogin = false;
+  FirebaseUser _user;
+
+  Community _myComm;
 
   onLoggedIn(FirebaseUser user) async {
     await _checkAuth();
@@ -29,7 +35,7 @@ class _MyCommunityFragmentState extends State<MyCommunityFragment> {
 
   void _onLogoutButtonPressed() async {
     await _auth.signOut();
-    setState(() => _isLogin = false);
+    setState(() => _user = null);
   }
 
   void _onRegisterCommButtonPressed() {
@@ -39,10 +45,11 @@ class _MyCommunityFragmentState extends State<MyCommunityFragment> {
 
   void _checkAuth() async {
     FirebaseUser user = await _auth.currentUser();
-    if (user != null)
-      setState(() => _isLogin = true);
-    else
-      setState(() => _isLogin = false);
+    var community = await CommunityFB.loadCommunitiesByUserId(user.uid);
+    setState(() {
+      _user = user;
+      _myComm = community;
+    });
   }
 
   @override
@@ -68,7 +75,7 @@ class _MyCommunityFragmentState extends State<MyCommunityFragment> {
         ),
         Container(
           height: MediaQuery.of(context).size.height * (4 / 7),
-          child: _isLogin ? buildAuthView() : buildUnauthView(),
+          child: _user != null ? buildAuthView() : buildUnauthView(),
         )
       ],
     );
@@ -101,16 +108,54 @@ class _MyCommunityFragmentState extends State<MyCommunityFragment> {
   Widget buildAuthView() {
     return Column(
       children: <Widget>[
-        Text(StrRes.NOT_HAVE_COMM, style: H3),
-        SizedBox(
-          height: 15,
-        ),
-        Container(
-          width: double.infinity,
-          child: AppButton(
-              onPressed: _onRegisterCommButtonPressed,
-              text: StrRes.REGISTER_MY_COMMUNITY),
-        ),
+        
+        if(_myComm == null)...[
+          Text(StrRes.NOT_HAVE_COMM, style: H3),
+          SizedBox(
+            height: 15,
+          ),
+          Container(
+            width: double.infinity,
+            child: AppButton(
+                onPressed: _onRegisterCommButtonPressed,
+                text: StrRes.REGISTER_MY_COMMUNITY),
+          ),
+        ],
+
+        if(_myComm != null)...[
+          Card(
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  leading: _myComm.active? Icon(Icons.check, color: Colors.green,): Icon(Icons.access_time, color: Colors.yellow,),
+                  title: Text(_myComm.name),
+                  subtitle: Text(_myComm.location),
+                ),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: FlatButton(
+                        onPressed: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => CommunityScreen2(data: _myComm,)));
+                        }, 
+                        child: Text(StrRes.VIEW))
+                    ),
+                    Expanded(
+                      child: FlatButton(
+                        onPressed: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => CommunityFormScreen(data: _myComm,)));
+                        }, 
+                        child: Text(StrRes.EDIT)
+                      )
+                    ),
+                  ],
+                )
+              ],
+            ),
+
+          ),
+        ],
+        
         Expanded(
           child: Container(),
         ),
