@@ -52,4 +52,13 @@ class StrRes {
   static final FAILED_LOAD_CITIES = "Failed to retrive cities.";
   static final SELECT_PROVINCE = "Select Province";
   static final SEARCH_PROVINCE = "Search Province";
+  static final PICK_IMAGE = "Pick Image";
+  static final OPEN_GALLERY = "Open gallery";
+  static final ALERT = "Alert!";
+  static final ALERT_REGISTER_COMMUNITY = "Are you sure want to register community?";
+  static final YES = "Yes";
+  static final NO = "No";
+  static final FAILED_UPLOAD_IMAGE = "Failed upload image.";
+  static final FAILED_REGISTER_COMMUNITY = "Failed to register community.";
+  static final SUCCESS_REGISTER_COMMUNITY = "Success to register community.";
 }

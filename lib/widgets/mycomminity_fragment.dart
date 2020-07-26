@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:momsclub/screens/login_screen.dart';
-import 'package:momsclub/screens/register_comm_screen.dart';
+import 'package:momsclub/screens/community_form_screen.dart';
 import 'package:momsclub/styles/text_styles.dart';
 import 'package:momsclub/utils/infos.dart';
 import 'package:momsclub/utils/str_res.dart';
@@ -34,7 +34,7 @@ class _MyCommunityFragmentState extends State<MyCommunityFragment> {
 
   void _onRegisterCommButtonPressed() {
     Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => RegisterCommunityScreen()));
+        MaterialPageRoute(builder: (context) => CommunityFormScreen()));
   }
 
   void _checkAuth() async {

@@ -105,7 +105,7 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
           CupertinoTextField(
             controller: _provinceTxtCtrl,
             readOnly: true,
-            onTap: (){
+            onTap: _provinces == null ? null: (){
               showModalBottomSheet(
                 context: context, 
                 builder: (context) => ProvinceSelector(provinces: _provinces, onSelected: _onProvinceSelected,)
