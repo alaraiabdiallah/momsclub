@@ -56,6 +56,7 @@ class StrRes {
   static final OPEN_GALLERY = "Open gallery";
   static final ALERT = "Alert!";
   static final ALERT_REGISTER_COMMUNITY = "Are you sure want to register community?";
+  static final ALERT_SAVE_COMMUNITY = "Are you sure want to save community?";
   static final YES = "Yes";
   static final NO = "No";
   static final FAILED_UPLOAD_IMAGE = "Failed upload image.";
@@ -63,4 +64,7 @@ class StrRes {
   static final SUCCESS_REGISTER_COMMUNITY = "Success to register community.";
   static final VIEW = "View";
   static final EDIT = "Edit";
+  static final SAVE = "Save";
+  static final SUCCESS_SAVE_COMMUNITY = "Success to save community.";
+
 }

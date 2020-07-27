@@ -52,6 +52,13 @@ class _MyCommunityFragmentState extends State<MyCommunityFragment> {
     });
   }
 
+  void _onSaveCommunity() async {
+    var community = await CommunityFB.loadCommunitiesByUserId(_user.uid);
+    setState(() {
+      _myComm = community;
+    });
+  }
+
   @override
   void initState() {
     _checkAuth();
@@ -108,7 +115,6 @@ class _MyCommunityFragmentState extends State<MyCommunityFragment> {
   Widget buildAuthView() {
     return Column(
       children: <Widget>[
-        
         if(_myComm == null)...[
           Text(StrRes.NOT_HAVE_COMM, style: H3),
           SizedBox(
@@ -143,7 +149,7 @@ class _MyCommunityFragmentState extends State<MyCommunityFragment> {
                     Expanded(
                       child: FlatButton(
                         onPressed: (){
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => CommunityFormScreen(data: _myComm,)));
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => CommunityFormScreen(data: _myComm, onSave: _onSaveCommunity,)));
                         }, 
                         child: Text(StrRes.EDIT)
                       )

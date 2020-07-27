@@ -20,8 +20,9 @@ import 'package:slugify/slugify.dart';
 class CommunityFormScreen extends StatefulWidget {
 
   final Community data;
+  final Function onSave;
 
-  const CommunityFormScreen({Key key, this.data}) : super(key: key);
+  const CommunityFormScreen({Key key, this.data, this.onSave}) : super(key: key);
   @override
   _CommunityFormScreenState createState() =>
       _CommunityFormScreenState();
@@ -87,16 +88,21 @@ class _CommunityFormScreenState extends State<CommunityFormScreen> {
     setState(()=> _user = user);
   }
 
+  String _contactValueBySource(String source){
+     List<Contact> contacts = widget.data.contacts;
+     Contact contact = contacts.firstWhere((e) => e.source == source, orElse: () => null);
+     return contact != null ? contact.value : null;
+  }
+
   void _editDataAttach(){
     if(widget.data != null){
-      // List<Contact> contacts = widget.data.contacts;
       _nameTxtCtrl.text = widget.data.name;
       _locTxtCtrl.text = widget.data.location;
       _descTxtCtrl.text = widget.data.desc;
       _imagePath = widget.data.imageURL;
-      // _phoneTxtCtrl.text = contacts.where((e) => e.source == "phone").first.value;
-      // _waTxtCtrl.text = contacts.where((e) => e.source == "whatsapp").first.value;
-      // _igTxtCtrl.text = contacts.where((e) => e.source == "instagram").first.value;
+      _phoneTxtCtrl.text = _contactValueBySource("phone");
+      _waTxtCtrl.text = _contactValueBySource("whatsapp");
+      _igTxtCtrl.text = _contactValueBySource("instagram");
     }
   }
 
@@ -146,29 +152,44 @@ class _CommunityFormScreenState extends State<CommunityFormScreen> {
     }
     return await ref.getDownloadURL();
   }
-  _onRegister() async {
+
+  List<Map<String,dynamic>> _contactInputs(){
     List<Map<String,dynamic>> contacts = List<Map<String,dynamic>>();
     if(_phoneTxtCtrl.text.isNotEmpty)
       contacts.add({"source":"phone", "value":_phoneTxtCtrl.text});
     if(_waTxtCtrl.text.isNotEmpty)
       contacts.add({"source":"whatsapp", "value":_waTxtCtrl.text});
     if(_igTxtCtrl.text.isNotEmpty)
-      contacts.add({"source":"instagram", "value": _igTxtCtrl.text}); 
-
+      contacts.add({"source":"instagram", "value": _igTxtCtrl.text});
+    return contacts;
+  }
+  _onSave() async {
     try {
-      CollectionReference community = Firestore.instance.collection('communities');
-      var imageUploaded = await _uploadImage();
-      Map<String,dynamic> data = {
+      String image;
+      if(widget.data.imageURL != null && _image == null){
+        image = widget.data.imageURL;
+      }else if(_image != null){
+        image = await _uploadImage();
+      }
+      bool active = widget.data != null? widget.data.active : false;
+      Map<String, dynamic> data = {
         "location": _locTxtCtrl.text,
         "name": _nameTxtCtrl.text,
         "desc": _descTxtCtrl.text,
-        "active": false,
+        "active": active,
         "userId": _user.uid,
-        "contacts": contacts,
-        "imageURL": imageUploaded
-      }; 
-      await community.add(data);
-      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(StrRes.SUCCESS_REGISTER_COMMUNITY),));
+        "contacts": _contactInputs(),
+        "imageURL": image
+      };
+      CollectionReference community = Firestore.instance.collection('communities');
+      String msg = widget.data != null? StrRes.SUCCESS_SAVE_COMMUNITY : StrRes.SUCCESS_REGISTER_COMMUNITY;
+      if(widget.data != null){
+        await community.document(widget.data.id).updateData(data);
+        widget.onSave();
+      } else {
+        await community.add(data);
+      }
+      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(msg),));
       await Future.delayed(Duration(seconds: 1));
       Navigator.of(context).pop();
     } on Exception catch (e) {
@@ -180,9 +201,6 @@ class _CommunityFormScreenState extends State<CommunityFormScreen> {
       var sb = SnackBar(content: Text(StrRes.FAILED_REGISTER_COMMUNITY), backgroundColor: Colors.red,);
       _scaffoldKey.currentState.showSnackBar(sb);
     }
-    
-
-    
   }
 
   _onRegisterButtonPressed() {
@@ -190,9 +208,10 @@ class _CommunityFormScreenState extends State<CommunityFormScreen> {
       barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
+        String msg = widget.data != null ? StrRes.ALERT_SAVE_COMMUNITY : StrRes.ALERT_REGISTER_COMMUNITY;
         return AlertDialog(
           title: Text(StrRes.ALERT),
-          content: Text(StrRes.ALERT_REGISTER_COMMUNITY),
+          content: Text(msg),
           actions: <Widget>[
             FlatButton(
               child: Text(StrRes.NO),
@@ -201,7 +220,7 @@ class _CommunityFormScreenState extends State<CommunityFormScreen> {
             FlatButton(
               child: Text(StrRes.YES),
               onPressed: () async {
-                await _onRegister();
+                await _onSave();
                 Navigator.of(context).pop();
               }
             ),
@@ -233,6 +252,8 @@ class _CommunityFormScreenState extends State<CommunityFormScreen> {
 
     String _button1_str = _step == 0 ? StrRes.CANCEL: StrRes.BACK;
     String _button2_str = _step == 0 ? StrRes.NEXT: StrRes.REGISTER;
+
+    if(widget.data != null && _step == 1) _button2_str = StrRes.SAVE;
 
     return Container(
       padding: EdgeInsets.only(top: 5),
