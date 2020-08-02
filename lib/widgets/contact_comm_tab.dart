@@ -47,6 +47,28 @@ class ContactCommunityTab extends StatelessWidget {
           },
         );
         break;
+      case 'website':
+        return ListTile(
+          leading: Icon(Icons.link),
+          title: Text("Website", style: _bodyTextStyle),
+          subtitle: Text("Tap here to visit", style: _bodyTextStyle.copyWith(color: Colors.blue),),
+          onTap: () async {
+            var url = data.value;
+            if (await canLaunch(url)) await launch(url);
+          },
+        );
+        break;
+      case 'facebook':
+        return ListTile(
+          leading: Icon(Icons.link),
+          title: Text("Facebook", style: _bodyTextStyle),
+          subtitle: Text("Tap here to visit", style: _bodyTextStyle.copyWith(color: Colors.blue),),
+          onTap: () async {
+            var url = data.value;
+            if (await canLaunch(url)) await launch(url);
+          },
+        );
+        break;
       default:
         return Container();
     }
@@ -61,7 +83,7 @@ class ContactCommunityTab extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text("Contact", style: H2.copyWith(color: AppColor.PRIMARY),),
-          ...data.map(_buildListContact).toList()
+          ...data.where((e) => e.value.isNotEmpty).map(_buildListContact).toList()
         ],
       ),
     );
