@@ -40,7 +40,7 @@ class _MyCommunityFragmentState extends State<MyCommunityFragment> {
 
   void _onRegisterCommButtonPressed() {
     Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => CommunityFormScreen()));
+        MaterialPageRoute(builder: (context) => CommunityFormScreen(onSave: _onSaveCommunity,)));
   }
 
   void _checkAuth() async {

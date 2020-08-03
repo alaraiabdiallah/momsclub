@@ -43,6 +43,8 @@ class _CommunityFormScreenState extends State<CommunityFormScreen> {
   TextEditingController _phoneTxtCtrl = TextEditingController();
   TextEditingController _waTxtCtrl = TextEditingController();
   TextEditingController _igTxtCtrl = TextEditingController();
+  TextEditingController _fbTxtCtrl = TextEditingController();
+  TextEditingController _webTxtCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +105,8 @@ class _CommunityFormScreenState extends State<CommunityFormScreen> {
       _phoneTxtCtrl.text = _contactValueBySource("phone");
       _waTxtCtrl.text = _contactValueBySource("whatsapp");
       _igTxtCtrl.text = _contactValueBySource("instagram");
+      _fbTxtCtrl.text = _contactValueBySource("facebook");
+      _webTxtCtrl.text = _contactValueBySource("website");
     }
   }
 
@@ -161,12 +165,16 @@ class _CommunityFormScreenState extends State<CommunityFormScreen> {
       contacts.add({"source":"whatsapp", "value":_waTxtCtrl.text});
     if(_igTxtCtrl.text.isNotEmpty)
       contacts.add({"source":"instagram", "value": _igTxtCtrl.text});
+    if(_fbTxtCtrl.text.isNotEmpty)
+      contacts.add({"source":"facebook", "value": _fbTxtCtrl.text});
+    if(_webTxtCtrl.text.isNotEmpty)
+      contacts.add({"source":"website", "value": _webTxtCtrl.text});
     return contacts;
   }
   _onSave() async {
     try {
       String image;
-      if(widget.data.imageURL != null && _image == null){
+      if(widget.data != null && widget.data.imageURL != null && _image == null){
         image = widget.data.imageURL;
       }else if(_image != null){
         image = await _uploadImage();
@@ -245,7 +253,7 @@ class _CommunityFormScreenState extends State<CommunityFormScreen> {
   }
 
   _button2Condition() {
-    return _nameTxtCtrl.text.isNotEmpty && _locTxtCtrl.text.isNotEmpty && _descTxtCtrl.text.isNotEmpty && (_imagePath != null);
+    return _nameTxtCtrl.text.isNotEmpty && _locTxtCtrl.text.isNotEmpty && _descTxtCtrl.text.isNotEmpty;
   }
 
   Widget buildActionButtons() {
@@ -324,7 +332,7 @@ class _CommunityFormScreenState extends State<CommunityFormScreen> {
                 ],
               )
             ],
-            if(_image == null && widget.data.imageURL != null)...[
+            if(_image == null && widget.data != null && widget.data.imageURL != null)...[
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -386,6 +394,24 @@ class _CommunityFormScreenState extends State<CommunityFormScreen> {
             CupertinoTextField(
               controller: _igTxtCtrl,
               placeholder: StrRes.COMMUNITY_FIELD_INSTR_IG,
+            ),
+            SizedBox(height: 15),
+            Text(
+              StrRes.FB,
+              style: H5,
+            ),
+            CupertinoTextField(
+              controller: _fbTxtCtrl,
+              placeholder: StrRes.COMMUNITY_FIELD_INSTR_FB,
+            ),
+            SizedBox(height: 15),
+            Text(
+              StrRes.WEB,
+              style: H5,
+            ),
+            CupertinoTextField(
+              controller: _webTxtCtrl,
+              placeholder: StrRes.COMMUNITY_FIELD_INSTR_WEB,
             )
           ],
         ))

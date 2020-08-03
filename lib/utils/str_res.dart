@@ -13,6 +13,8 @@ class StrRes {
   static final PHONE = "Phone";
   static final WA = "WhatsApp";
   static final IG = "Instagram";
+  static final WEB = "Website";
+  static final FB = "Facebook";
   static final COMM_NOTFOUND = "We can't find community";
   static final LOGIN = "LOGIN";
   static final LOGOUT = "LOGOUT";
@@ -47,6 +49,8 @@ class StrRes {
   static final COMMUNITY_FIELD_INSTR_LOC = "Ex: Jakarta";
   static final COMMUNITY_FIELD_INSTR_PHONE = "Ex: +628XXXXXX";
   static final COMMUNITY_FIELD_INSTR_IG = "Username of your community Instagram";
+  static final COMMUNITY_FIELD_INSTR_FB = "ex: https://facebook.com/username";
+  static final COMMUNITY_FIELD_INSTR_WEB = "ex: https://google.com";
   static final COMMUNITY_FIELD_INSTR_SELECT = "Tap to select";
   static final FAILED_LOAD_PROVINCES = "Failed to retrive provinces.";
   static final FAILED_LOAD_CITIES = "Failed to retrive cities.";
