@@ -10,7 +10,7 @@ class Community {
   Community({this.id, this.name, this.location, this.imageURL, this.desc, this.contacts, this.active});
 
   Community.fromJson(Map<String, dynamic> json) {
-    var defaultImage = "https://firebasestorage.googleapis.com/v0/b/momsclub-8d5c2.appspot.com/o/Moms_Club.png?alt=media&token=3c42207c-adc0-4491-bc08-0bc130b798ea";
+    var defaultImage = "https://picsum.photos/200/300";
     id = json['id'];
     name = json['name'];
     location = json['location'];
