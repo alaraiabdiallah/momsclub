@@ -10,9 +10,12 @@ class CommunityFB {
 
   static Future<Community> loadCommunitiesByUserId(String id) async {
     var fb = await Firestore.instance.collection('communities').where("userId",isEqualTo: id).getDocuments();
-    DocumentSnapshot doc = fb.documents.first;
-    var data = doc.data;
-    data['id'] = doc.documentID;
-    return data != null ? Community.fromJson(data): null;
+    if(fb.documents.length > 0){
+      DocumentSnapshot doc = fb.documents.first;
+      var data = doc.data;
+      data['id'] = doc.documentID;
+      return data != null ? Community.fromJson(data): null;
+    }
+    return null;
   } 
 }

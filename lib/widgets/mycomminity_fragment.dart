@@ -44,8 +44,11 @@ class _MyCommunityFragmentState extends State<MyCommunityFragment> {
   }
 
   void _checkAuth() async {
+    Community community;
     FirebaseUser user = await _auth.currentUser();
-    var community = await CommunityFB.loadCommunitiesByUserId(user.uid);
+    if(user != null){
+      community = await CommunityFB.loadCommunitiesByUserId(user.uid);
+    }
     setState(() {
       _user = user;
       _myComm = community;
